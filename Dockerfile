@@ -5,6 +5,7 @@ MAINTAINER Roy Inganta Ginting <roy.i.ginting@gdplabs.id>
 ENV DEBIAN_FRONTEND noninteractive
 ENV HOME /home/jenkins-slave
 ENV JENKINS_SWARM_VERSION 1.22
+ENV ANDROID_SDK_VERSION 24.3.2
 ENV JAVA_HOME /usr/lib/jvm/java-7-oracle/
 ENV ANDROID_HOME /opt/android-sdk-linux/
 ENV PATH $ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$JAVA_HOME/bin:$PATH
@@ -21,12 +22,28 @@ RUN dpkg --add-architecture i386 && \
     libncurses5:i386 libstdc++6:i386 zlib1g:i386 && \
     rm -fr /var/lib/apt/lists
 
-RUN wget --progress=dot:giga https://dl.google.com/android/android-sdk_r24.0.2-linux.tgz && \
-    mv android-sdk_r24.0.2-linux.tgz /opt/ && \
-    cd /opt && tar xzvf ./android-sdk_r24.0.2-linux.tgz && \
-    rm android-sdk_r24.0.2-linux.tgz
+RUN wget --progress=dot:giga https://dl.google.com/android/android-sdk_r$ANDROID_SDK_VERSION-linux.tgz && \
+    mv android-sdk_r$ANDROID_SDK_VERSION-linux.tgz /opt/ && \
+    cd /opt && tar xzvf ./android-sdk_r$ANDROID_SDK_VERSION-linux.tgz && \
+    rm android-sdk_r$ANDROID_SDK_VERSION-linux.tgz
 
-RUN echo "y" | android update sdk -u --filter android-8,android-10,android-11,android-12,android-13,android-14,android-15,android-16,android-17,android-18,android-19,android-20,android-21,android-22,extra-android-m2repository,extra-android-support && \
+RUN echo "y" | android update sdk -u --filter android-8,
+android-10,\
+android-11,\
+android-12,\
+android-13,\
+android-14,\
+android-15,\
+android-16,\
+android-17,\
+android-18,\
+android-19,\
+android-20,\
+android-21,\
+android-22,\
+extra-android-m2repository,\
+extra-android-support,\
+extra-google-m2repository && \
     chmod -R 755 $ANDROID_HOME
 
 RUN echo "y" | android update sdk -u --filter tools,platform-tools,build-tools-22.0.1

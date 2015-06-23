@@ -27,7 +27,7 @@ RUN wget --progress=dot:giga https://dl.google.com/android/android-sdk_r$ANDROID
     cd /opt && tar xzvf ./android-sdk_r$ANDROID_SDK_VERSION-linux.tgz && \
     rm android-sdk_r$ANDROID_SDK_VERSION-linux.tgz
 
-RUN echo "y" | android update sdk -u --filter android-8,
+RUN echo "y" | android update sdk -u --filter android-8,\
 android-10,\
 android-11,\
 android-12,\

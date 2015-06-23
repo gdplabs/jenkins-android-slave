@@ -18,7 +18,7 @@ RUN echo "debconf shared/accepted-oracle-license-v1-1 select true" | /usr/bin/de
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y \
-    git curl wget oracle-java7-installer oracle-java7-set-default \
+    git curl wget unzip oracle-java7-installer oracle-java7-set-default \
     libncurses5:i386 libstdc++6:i386 zlib1g:i386 && \
     rm -fr /var/lib/apt/lists
 
